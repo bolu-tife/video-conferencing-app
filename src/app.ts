@@ -1,40 +1,59 @@
-import { Request, Response, Application } from 'express';
-import express = require('express');
+import { Request, Response, Application } from "express";
+import express from "express";
+import bodyParser from "body-parser"
+import cors from 'cors';
+import { Server } from 'socket.io';
+import http from 'http';
+import { ExpressPeerServer} from 'peer';
 
-// import cors from 'cors';
-// import { Server } from 'socket.io';
-// import http from 'http';
 
-
+const { v4: uuidv4 } = require("uuid");
 const PORT = 8000;
 const app: Application = express();
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
+
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'));
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
-// const server = http.createServer(app);
-// const io = new Server(server, {
-//   cors: {
-//     origin: '*',
-//     methods: ['GET', 'POST'],
-//   },
-// });
-
-// io.on('connection', (socket) => {
-//   console.log('User is connected');
-//   socket.on('disconnect', () => {
-//     console.log('user disconnected');
-//   });
-// });
-
-app.get('/', (_: Request, res: Response) => {
-  res.send('Welcome to the Google Meet Clone!');
+const server = http.createServer(app);
+const io = new Server(server);
+const peerServer = ExpressPeerServer(server, {
+  	//@ts-ignore
+  debug: true,
 });
 
-// app.get()
 
-// server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.use('/peerjs', peerServer);
+app.get("/", (_: Request, res: Response) => {
+    res.render("landing");
+  })
+  .post("/", (req: Request, res: Response) => {
+    res.redirect(`/room/${req.body.room}`);  });
 
-app.listen(PORT, () => console.log('Listening on port: ' + PORT));
+app.get("/newRoom", (req: Request, res: Response) => {
+  res.redirect(`/room/${uuidv4()}`);
+});
+
+
+app.get("/room/:roomId", (req: Request, res: Response) => {
+  const roomId = req.params.roomId
+  res.render('room');
+})
+
+io.on('connection', (socket) => {
+  socket.on('join-room', (roomId, userId) => {
+    socket.join(roomId);
+    socket.broadcast.to(roomId).emit('user-connected', userId);
+
+    socket.on('message', (message) => {
+      io.to(roomId).emit('createMessage', message);
+    });
+  });
+});
+
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+// app.listen(PORT, () => console.log("Listening on port: " + PORT));
