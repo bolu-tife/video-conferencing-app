@@ -25,8 +25,9 @@ const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
 
-
 app.use('/peerjs', peerServer);
+
+
 app.get("/", (_: Request, res: Response) => {
     res.render("landing");
   })
@@ -38,14 +39,21 @@ app.get("/newRoom", (req: Request, res: Response) => {
 });
 
 
-app.get("/room/:roomId", (req: Request, res: Response) => {
-  const roomId = req.params.roomId
-  res.render('room');
+app.get("/room/:room", (req: Request, res: Response) => {
+  res.render('room', { roomId: req.params.room });
 })
 
+
+
 io.on('connection', (socket) => {
+  // if (socket.handshake.url != '/room/') {
+  //   socket.disconnect();
+  //   return;
+  // }
+
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId);
+    console.log("Connected");
     socket.broadcast.to(roomId).emit('user-connected', userId);
 
     socket.on('message', (message) => {
@@ -54,6 +62,5 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
-// app.listen(PORT, () => console.log("Listening on port: " + PORT));
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
