@@ -19,7 +19,11 @@ app.use(express.json());
 app.use(cors());
 
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+});
 const peerServer = ExpressPeerServer(server, {
   	//@ts-ignore
   debug: true,
@@ -32,28 +36,25 @@ app.get("/", (_: Request, res: Response) => {
     res.render("landing");
   })
   .post("/", (req: Request, res: Response) => {
-    res.redirect(`/room/${req.body.room}`);  });
+    res.redirect(`/${req.body.room}`);  });
 
 app.get("/newRoom", (req: Request, res: Response) => {
-  res.redirect(`/room/${uuidv4()}`);
+  res.redirect(`/${uuidv4()}`);
 });
 
 
-app.get("/room/:room", (req: Request, res: Response) => {
+app.get("/:room", (req: Request, res: Response) => {
   res.render('room', { roomId: req.params.room });
 })
 
 
 
 io.on('connection', (socket) => {
-  // if (socket.handshake.url != '/room/') {
-  //   socket.disconnect();
-  //   return;
-  // }
 
   socket.on('join-room', (roomId, userId) => {
-    socket.join(roomId);
     console.log("Connected");
+    socket.join(roomId);
+    
     socket.broadcast.to(roomId).emit('user-connected', userId);
 
     socket.on('message', (message) => {
