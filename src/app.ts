@@ -5,7 +5,7 @@ import cors from 'cors';
 import { Server } from 'socket.io';
 import http from 'http';
 import { ExpressPeerServer } from 'peer';
-import { v4 as uuidv4 } from 'uuid';
+import {generateRoomId} from "./helper/room";
 
 const PORT = 8000;
 const app: Application = express();
@@ -36,15 +36,30 @@ app
     res.render('landing');
   })
   .post('/', (req: Request, res: Response) => {
-    res.redirect(`/${req.body.room}`);
+    let room = req.params.room
+   
+    // if (!isRoomIdValid(room))
+    //   room = generateRoomId()
+    res.redirect(`/${room}`);
   });
 
 app.get('/newRoom', (req: Request, res: Response) => {
-  res.redirect(`/${uuidv4()}`);
+  const roomId = generateRoomId()
+  res.redirect(`/${roomId}`);
+});
+
+app.get('/thankyou', (req: Request, res: Response) => {
+  console.log(req.query.room );
+  
+  res.render('leaveMeeting', { roomId: req.query.room });
 });
 
 app.get('/:room', (req: Request, res: Response) => {
-  res.render('room', { roomId: req.params.room });
+  let room = req.params.room
+  
+  res.render('room', { roomId: room });
+  
+
 });
 
 io.on('connection', (socket) => {
