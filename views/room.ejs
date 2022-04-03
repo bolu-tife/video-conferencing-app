@@ -28,9 +28,9 @@
       <div class="header__back">
         <i class="fas fa-angle-left"></i>
       </div>
-      <h3>Video Chat</h2>
+      
     </div>
-  </div>
+  </div>  
   <div class="main">
     <div class="main__left">
       <div class="videos__group">
@@ -38,10 +38,16 @@
 
         </div>
       </div>
-      <div class="text-box" contenteditable="true">HelloWorld</div>
+      <!-- <div class="text-box" contenteditable="true">HelloWorld</div> -->
       <div class="options">
-       
         <div class="options__left">
+          <div  class="options__p">  
+            <p >Time | <%= roomId %> </p>
+          </div>
+         </div>
+        <div class="options__middle">
+          
+         
           <div id="stopVideo" class="options__button">
             <i class="fa fa-video-camera"></i>
           </div>
@@ -55,14 +61,18 @@
           <div id="presentButton" class="options__button">
             <i class="fa-solid fa-presentation-screen"></i>
           </div>
-          <form action="/thankyou">
-          <div id="leaveMeeting" class="options__button">
-         <button type="submit" name="room" value="<%= roomId %>"> <i class="fa-solid fa-circle-phone-hangup"></i></button>
-          </div>
-        </form>
           <div id="showChat" class="options__button">
             <i class="fa fa-comment"></i>
           </div>
+          <div id="showChat2" class="options__button">
+            <i class="fa fa-comment"></i>
+          </div>
+          <form action="/thankyou">
+          <div id="leaveMeeting" class="options__button background__red">
+         <button type="submit" name="room" value="<%= roomId %>"> <i class="fa-solid fa-circle-phone-hangup"></i></button>
+          </div>
+        </form>
+          
         </div>
         <div class="options__right">
           <div id="inviteButton" class="options__button">
@@ -84,13 +94,9 @@
         </div>
       </div>
     </div>
-  </div>ß
-
+  </div>
 
   <script src="/js/script.js"></script>
 </body>
-<footer>
-  Copyright 2022 HerDevStories
-</footer>
 
 </html>

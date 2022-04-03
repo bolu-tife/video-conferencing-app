@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 :root {
-  --main-darklg: #1d2635;
-  --main-dark: #161d29;
-  --primary-color: #2f80ec;
+  --main-darklg: #171c25;
+  --main-dark: #171c25;
+  --primary-color: #365277;
   --main-light: #eeeeee;
   font-family: "Poppins", sans-serif;
 }
@@ -17,7 +17,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 8vh;
   position: relative;
   width: 100%;
   background-color: var(--main-darklg);
@@ -29,7 +28,7 @@
 
 .main {
   overflow: hidden;
-  height: 92vh;
+  height: 100vh;
   display: flex;
 }
 
@@ -66,25 +65,39 @@ video {
 }
 
 .options__left {
-  display: flex;
+   display: flex;
+
 }
 
-.options__right {
-  margin-left: auto;
-}
+.options__middle {
+    display: flex;
+    margin: auto;}
 
 .options__button {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color);
-  height: 50px;
-  border-radius: 5px;
+  height: 45px;
+  border-radius: 50%;
   color: var(--main-light);
-  font-size: 1.2rem;
-  width: 50px;
+  font-size: 1rem;
+  width: 45px;
   margin: 0 0.5rem;
 }
+
+.options__p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+    height: 45px;
+    /* width: 2px */
+
+  }
+  
 
 .background__red {
   background-color: #f6484a;
@@ -94,7 +107,7 @@ video {
   display: flex;
   flex-direction: column;
   flex: 0.3;
-  background-color: #242f41;
+  background-color: #f1f2f4;
 }
 
 .main__chat_window {
@@ -134,7 +147,7 @@ video {
 }
 
 .message > b {
-  color: #eeeeee;
+  color: #131c41;
   display: flex;
   align-items: center;
   text-transform: capitalize;
@@ -146,7 +159,7 @@ video {
 }
 
 .message > span {
-  background-color: #eeeeee;
+  background-color: #dddde6;
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 5px;
@@ -161,6 +174,9 @@ video {
 #showChat {
   display: none;
 }
+#showChat2 {
+    /* display: none; */
+  }
 
 .header__back {
   display: none;
@@ -170,6 +186,13 @@ video {
   left: 28px;
   color: #fff;
 }
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+    color: black;
+}
+
 
 @media (max-width: 700px) {
   .main__right {
@@ -187,5 +210,8 @@ video {
 
   #showChat {
     display: flex;
+  }
+  #showChat2 {
+    display: none;
   }
 }

@@ -2,6 +2,8 @@ const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 const showChat = document.querySelector("#showChat");
+const displayChat = document.querySelector("#showChat2");
+
 const backBtn = document.querySelector(".header__back");
 const screenShare = document.querySelector("#presentButton");
 myVideo.muted = true;
@@ -20,7 +22,15 @@ showChat.addEventListener("click", () => {
   document.querySelector(".header__back").style.display = "block";
 });
 
-const user = "gg"
+
+// displayChat.addEventListener("toggle", () => {
+//     document.querySelector(".main__right").style.display = "none";
+//     document.querySelector(".main__right").style.flex = "0";
+//     document.querySelector(".main__left").style.display = "flex";
+//   });
+  
+
+const user = prompt("What is your name") || "user"
 
 var peer = new Peer(undefined, {
   path: "/peerjs",
