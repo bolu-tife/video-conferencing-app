@@ -30,7 +30,7 @@ showChat.addEventListener("click", () => {
 //   });
   
 
-const user = prompt("What is your name") || "user"
+const user =  "user"
 
 var peer = new Peer(undefined, {
   path: "/peerjs",
@@ -125,9 +125,10 @@ stopVideo.addEventListener("click", () => {
   const enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
     myVideoStream.getVideoTracks()[0].enabled = false;
-    html = `<i class="fas fa-video-slash"></i>`;
+    const html = `<i class="fas fa-video-slash"></i>`;
     stopVideo.classList.toggle("background__red");
     stopVideo.innerHTML = html;
+    console.log("video off")
   } else {
     myVideoStream.getVideoTracks()[0].enabled = true;
     html = `<i class="fas fa-video"></i>`;
@@ -138,7 +139,7 @@ stopVideo.addEventListener("click", () => {
 
 
 
-//sharing screen using getDisplayMedia
+// //sharing screen using getDisplayMedia
 screenShare.addEventListener("click", function () {
     navigator.mediaDevices.getDisplayMedia({
       video: {
@@ -151,6 +152,21 @@ screenShare.addEventListener("click", function () {
   
     }).then(stream => {
       let videoTrack = stream.getVideoTracks()[0];
+
+      console.log("hihi");
+      peer.on("call", (call) => {
+        call.answer(stream);
+         
+        const video = document.createElement("video");
+        console.log("hello")
+        call.on("stream", (userVideoStream) => {
+          addVideoStream(videoTrack, userVideoStream);
+        });
+        console.log("world")
+      });
+  
+
+
       videoTrack.onended = function () {
         stopScreenShare();
       }
