@@ -13,6 +13,11 @@
   padding: 0;
 }
 
+/* #sharevideo {
+  border: 1px solid #999;
+  width: 98%;
+  max-width: 860px;
+} */
 .header {
   display: flex;
   justify-content: center;
@@ -33,9 +38,13 @@
 }
 
 .main__left {
-  flex: 0.7;
+  flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.main__left_chat {
+  flex: 0.7;
 }
 
 .videos__group {
@@ -65,13 +74,13 @@ video {
 }
 
 .options__left {
-   display: flex;
-
+  display: flex;
 }
 
 .options__middle {
-    display: flex;
-    margin: auto;}
+  display: flex;
+  margin: auto;
+}
 
 .options__button {
   display: flex;
@@ -87,27 +96,35 @@ video {
 }
 
 .options__p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 1rem;
-    margin: 0 0.5rem;
-    height: 45px;
-    /* width: 2px */
-
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  height: 45px;
+  /* width: 2px */
+}
 
 .background__red {
   background-color: #f6484a;
 }
 
 .main__right {
+  display: none;
+  flex-direction: column;
+  background-color: #f1f2f4;
+}
+
+.main__right_chat {
   display: flex;
   flex-direction: column;
   flex: 0.3;
   background-color: #f1f2f4;
+}
+
+#captionButton {
+  display: none;
 }
 
 .main__chat_window {
@@ -172,35 +189,38 @@ video {
 }
 
 #showChat {
-  display: none;
+  /* display: none; */
 }
-#showChat2 {
-    /* display: none; */
-  }
 
-.header__back {
-  display: none;
-  position: absolute;
-  font-size: 1.3rem;
-  top: 17px;
-  left: 28px;
-  color: #fff;
-}
 .carousel-caption {
-    position: relative;
-    left: auto;
-    right: auto;
-    color: black;
+  position: relative;
+  left: auto;
+  right: auto;
+  color: black;
 }
-
 
 @media (max-width: 700px) {
+  .header__back {
+    display: none;
+    position: absolute;
+    font-size: 1.3rem;
+    top: 17px;
+    left: 28px;
+    color: #fff;
+  }
+
   .main__right {
     display: none;
   }
+
   .main__left {
     width: 100%;
     flex: 1;
+  }
+
+  .main__right_chat {
+    flex: 1;
+    background-color: #f1f2f4;
   }
 
   video {
@@ -211,7 +231,22 @@ video {
   #showChat {
     display: flex;
   }
-  #showChat2 {
+
+  .main__left_chat {
+    display: none;
+  }
+
+  .main__right_chat {
+    display: flex;
+    flex: 1;
+  }
+
+  left_back {
+    display: flex;
+    flex: 1;
+  }
+
+  right_back {
     display: none;
   }
 }

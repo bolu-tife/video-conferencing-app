@@ -2,10 +2,11 @@ import { Request, Response, Application } from "express";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { Server } from "socket.io";
-import http from "http";
+import { Server, Socket } from "socket.io";
 import { ExpressPeerServer } from "peer";
-import { generateRoomId } from "./helper/room";
+import { createServer } from "http";
+
+import { generateRoomId } from "./utils/room";
 
 const PORT = 8000;
 const app: Application = express();
@@ -17,13 +18,13 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
 
-const server = http.createServer(app);
-const io = new Server(server, {
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
   cors: {
     origin: "*",
   },
 });
-const peerServer = ExpressPeerServer(server, {
+const peerServer = ExpressPeerServer(httpServer, {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   debug: true,
@@ -36,11 +37,8 @@ app
     res.render("landing");
   })
   .post("/", (req: Request, res: Response) => {
-    let room = req.params.room;
-
-    // if (!isRoomIdValid(room))
-    //   room = generateRoomId()
-    res.redirect(`/${room}`);
+    const roomId = req.body.room;
+    res.redirect(`/${roomId}`);
   });
 
 app.get("/newRoom", (req: Request, res: Response) => {
@@ -48,29 +46,27 @@ app.get("/newRoom", (req: Request, res: Response) => {
   res.redirect(`/${roomId}`);
 });
 
-app.get("/thankyou", (req: Request, res: Response) => {
-  console.log(req.query.room);
-
-  res.render("leaveMeeting", { roomId: req.query.room });
+app.get("/thankyou/:room", (req: Request, res: Response) => {
+  console.log(req.params.room);
+  res.render("leaveMeeting", { roomId: req.params.room });
 });
 
 app.get("/:room", (req: Request, res: Response) => {
-  let room = req.params.room;
-
+  const room = req.params.room;
   res.render("room", { roomId: room });
 });
 
-io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId) => {
+io.on("connection", (socket: Socket) => {
+  socket.on("join-room", (roomId, userId, userName) => {
     console.log("Connected");
     socket.join(roomId);
 
-    socket.broadcast.to(roomId).emit("user-connected", userId);
+    socket.to(roomId).emit("user-connected", userId);
 
     socket.on("message", (message) => {
-      io.to(roomId).emit("createMessage", message);
+      io.to(roomId).emit("createMessage", message, userName);
     });
   });
 });
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+httpServer.listen(PORT, () => console.log(`Listening on port ${PORT}`));

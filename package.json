@@ -1,5 +1,5 @@
 {
-  "name": "google-meet-clone",
+  "name": "video-conferencing-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["video app", "chat app", "video conference", "socket"],
+  "author": "Boluwatife Omosowon",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.12",
