@@ -32,11 +32,11 @@ const peerServer = ExpressPeerServer(httpServer, {
 
 app.use("/peerjs", peerServer);
 
-app
-  .get("/", (_: Request, res: Response) => {
+app.route("/")
+  .get((req: Request, res: Response) => {
     res.render("landing");
   })
-  .post("/", (req: Request, res: Response) => {
+  .post((req: Request, res: Response) => {
     const roomId = req.body.room;
     res.redirect(`/${roomId}`);
   });
@@ -47,7 +47,6 @@ app.get("/newRoom", (req: Request, res: Response) => {
 });
 
 app.get("/thankyou/:room", (req: Request, res: Response) => {
-  console.log(req.params.room);
   res.render("leaveMeeting", { roomId: req.params.room });
 });
 
@@ -58,7 +57,6 @@ app.get("/:room", (req: Request, res: Response) => {
 
 io.on("connection", (socket: Socket) => {
   socket.on("join-room", (roomId, userId, userName) => {
-    console.log("Connected");
     socket.join(roomId);
 
     socket.to(roomId).emit("user-connected", userId);
