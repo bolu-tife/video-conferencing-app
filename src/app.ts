@@ -1,5 +1,4 @@
-import { Request, Response, Application } from "express";
-import express from "express";
+import express, { Request, Response, Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { Server, Socket } from "socket.io";
@@ -8,7 +7,6 @@ import { createServer } from "http";
 
 import { generateRoomId } from "./utils/room";
 
-const PORT = 8000;
 const app: Application = express();
 
 app.set("view engine", "ejs");
@@ -67,4 +65,5 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
+const PORT = process.env.PORT || 8000;
 httpServer.listen(PORT, () => console.log(`Listening on port ${PORT}`));
