@@ -2,7 +2,7 @@
   "name": "video-conferencing-app",
   "version": "1.0.0",
   "description": "A video conferencing app used to make video calls and chat.",
-  "main": "server.js",
+  "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
     "build": "npm run lint && rimraf dist/ && tsc",
