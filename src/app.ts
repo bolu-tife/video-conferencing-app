@@ -4,6 +4,7 @@ import cors from "cors";
 import { Server, Socket } from "socket.io";
 import { ExpressPeerServer } from "peer";
 import { createServer } from "http";
+import helmet from "helmet";
 
 import { generateRoomId } from "./utils/room";
 
@@ -11,6 +12,7 @@ const app: Application = express();
 
 app.set("view engine", "ejs");
 
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());

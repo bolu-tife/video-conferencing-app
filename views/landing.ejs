@@ -1,30 +1,37 @@
 <%- include('header'); -%>
 
-  <div class="main container">
+  <div class="main jumbotron row mx-auto px-4 py-5 ">
+    <!-- <div class="row px-4 py-5  text-center"> -->
 
-    <div class=" px-4 py-5 my-5 text-center">
-
-      <h1 class="display-5 fw-bold">Secure Video Conferencing for everyone</h1>
+      
       <div class="col-lg-6 mx-auto">
+        <h1 class="display-5 fw-bold">Secure Video Conferencing for Everyone</h1>
         <p class="lead mb-4">Connect, collaborate, and celebrate from anywhere with this video conferencing app</p>
-        <div class="row">
-          <div class="col-4">
-            <a href="/newRoom" class="btn btn-primary btn-md">New Meeting</a>
-          </div>
-          <div class="col-8">
+        <div class=" d-grid gap-2 d-lg-flex">
+          <!-- <div class="col-4"> -->
+            <a href="/newRoom" class="btn btn-primary btn-lg">New Meeting</a>
+          <!-- </div>
+          <div class="col-8 "> -->
 
             <form action="/" method="post">
-              <div class="input-group mb-3">
+              <div class="input-group py-2">
                 <input type="text" name="room" id="room" class="form-control" onkeyup="manage(this)"
                   placeholder="Enter a Meeting Link" aria-label="Recipient's username"
                   aria-describedby="button-addon2" />
                 <button class="btn btn-outline-secondary" type="submit" id="button" disabled>Join</button>
               </div>
             </form>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
+      <div class="col-lg-6 mx-auto" >
+      <img src="/img/vchat.jpg" alt="" width="100%" >
+    <!-- </div> -->
+      
+
     </div>
+    </div>
+    
   </div>
 
   <%- include('footer'); -%>

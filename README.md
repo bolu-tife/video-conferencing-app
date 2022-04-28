@@ -1,11 +1,11 @@
 # Video Conferencing App
 
-Video-Conferencing-App is a video chat app that makes use of web sockets. 
-
+![home page](/public/img/home.png)
 Live demo: https://v-conference-app.herokuapp.com/
 
 ## About
-This is a peer to peer video conferencing website where a user can chats. I  
+Video-Conferencing-App is a video chat app that makes use of web sockets. 
+This is a peer to peer video conferencing website where a user can chats and make group video calls. 
 
 ## Features
 1. Video Call
@@ -15,7 +15,7 @@ This is a peer to peer video conferencing website where a user can chats. I
 1. NodeJS
 2. Socket.io
 3. Peerjs(WebRTC)
-4. HTML, CSS, JavaScript, Typescript
+4. HTML, CSS, JavaScript, Typescript, Bootstrap
 
 ## Installation Prerequisites
 - Nodejs
@@ -29,7 +29,16 @@ This is a peer to peer video conferencing website where a user can chats. I
 4. Go to your browser and type `http://localhost:8000/` in the address bar.
 5. Welldone! 
 
-### Future Work/ Suggestions
+## Preview
+
+![home page](/public/img/home.png)
+![home page](/public/img/home2.png)
+![chat room page](/public/img/room.png)
+![copy room link page](/public/img/share-room.png)
+![thank-you page](/public/img/thank-you.png)
+
+
+## Future Work/ Suggestions
 
 - Add voice captions(speech to text)
 - Turn off the webcam light using stop() and reconnect stream
