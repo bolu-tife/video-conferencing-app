@@ -1,8 +1,8 @@
-# Video-Conferencing-App
+# Video Conferencing App
 
 Video-Conferencing-App is a video chat app that makes use of web sockets. 
 
-<!-- Check out the live demo:  -->
+Live demo: https://v-conference-app.herokuapp.com/
 
 ## About
 This is a peer to peer video conferencing website where a user can chats. I  
@@ -29,8 +29,8 @@ This is a peer to peer video conferencing website where a user can chats. I
 4. Go to your browser and type `http://localhost:8000/` in the address bar.
 5. Welldone! 
 
-### Suggestions
+### Future Work/ Suggestions
 
-- Add Captions.
+- Add voice captions(speech to text)
 - Turn off the webcam light using stop() and reconnect stream
 - More Responsive Css
