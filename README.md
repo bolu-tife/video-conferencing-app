@@ -3,6 +3,8 @@
 ![home page](/public/img/home.png)
 Live demo: https://v-conference-app.herokuapp.com/
 
+[![Node.js CI](https://github.com/bolu-tife/video-conferencing-app/actions/workflows/node.js.yml/badge.svg)](https://github.com/bolu-tife/video-conferencing-app/actions/workflows/node.js.yml)
+
 ## About
 Video-Conferencing-App is a video chat app that makes use of web sockets. 
 This is a peer to peer video conferencing website where a user can chats and make group video calls. 
