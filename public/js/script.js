@@ -69,12 +69,23 @@ peer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id, user);
 });
 
+
 const addVideoStream = (video, stream) => {
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
-    videoGrid.append(video);
   });
+  videoGrid.append(video);
+
+  let totalUsers = document.getElementsByTagName("video").length ;
+  console.log(totalUsers);
+  if (totalUsers > 7) {
+    // const height = Math.ceil(totalUsers/4)
+    for (let index = 0; index < totalUsers; index++) {
+      document.getElementsByTagName("video")[index].style.width = 25 + "%";
+      // document.getElementsByTagName("video")[index].style.height = height + "%";
+    }
+  }
 };
 
 let text = document.querySelector("#chat_message");
@@ -125,7 +136,8 @@ stopVideo.addEventListener("click", () => {
   }
 });
 
-//sharing screen usingg getDisplayMedia
+//sharing screen using getDisplayMedia
+
 screenShare.addEventListener("click", function () {
   navigator.mediaDevices
     .getDisplayMedia({
