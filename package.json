@@ -20,7 +20,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bolu-tife/google-meet-clone.git"
+    "url": "https://github.com/bolu-tife/video-conferencing-app.git"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
