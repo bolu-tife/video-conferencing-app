@@ -75,8 +75,8 @@ const addVideoStream = (video, stream) => {
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
+    videoGrid.append(video);
   });
-  videoGrid.append(video);
 
   let totalUsers = document.getElementsByTagName("video").length;
   console.log(totalUsers);
