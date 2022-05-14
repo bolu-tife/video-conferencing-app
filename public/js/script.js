@@ -1,4 +1,6 @@
-const socket = io("/");
+const socket = io("/", {
+  transports: ["polling"],
+});
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 const showChat = document.querySelector("#showChat");
@@ -69,7 +71,6 @@ peer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id, user);
 });
 
-
 const addVideoStream = (video, stream) => {
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
@@ -77,7 +78,7 @@ const addVideoStream = (video, stream) => {
   });
   videoGrid.append(video);
 
-  let totalUsers = document.getElementsByTagName("video").length ;
+  let totalUsers = document.getElementsByTagName("video").length;
   console.log(totalUsers);
   if (totalUsers > 7) {
     // const height = Math.ceil(totalUsers/4)
