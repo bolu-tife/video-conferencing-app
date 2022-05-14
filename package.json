@@ -22,6 +22,8 @@
     "type": "git",
     "url": "https://github.com/bolu-tife/video-conferencing-app.git"
   },
+  "bugs": "https://github.com/bolu-tife/video-conferencing-app/issues",
+  "homepage": "http://v-conference-app.herokuapp.com/",
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/ejs": "^3.1.0",
