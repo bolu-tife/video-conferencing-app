@@ -1,4 +1,7 @@
-const socket = io("/");
+const socket = io("/",{
+  transports: ["polling"]
+  }
+  );
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 const showChat = document.querySelector("#showChat");
@@ -26,7 +29,7 @@ const user = prompt("Enter your name");
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "8000",
+  port: window.location.port,
 });
 
 let currentPeer = [];
